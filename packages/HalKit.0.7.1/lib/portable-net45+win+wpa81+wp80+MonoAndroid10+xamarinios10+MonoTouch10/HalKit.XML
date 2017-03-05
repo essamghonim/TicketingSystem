@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HalKit</name>
+    </assembly>
+    <members>
+        <member name="T:HalKit.Json.RelAttribute">
+            <summary>
+            When applied to the member of a type, specifies that the member
+            should be serialized/deserialized into/from the "_links" section
+            of "application/hal+json" content.
+            </summary>
+            <remarks>In general this should be applied to a property of type
+            <see cref="T:HalKit.Models.Response.Link"/> or <see cref="T:HalKit.Models.Response.Link"/>[].</remarks>
+        </member>
+        <member name="M:HalKit.Json.RelAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instances of a <see cref="T:HalKit.Json.RelAttribute"/>
+            class with the given link relation.
+            </summary>
+            <param name="rel"></param>
+        </member>
+        <member name="P:HalKit.Json.RelAttribute.Rel">
+            <summary>
+            Gets the link relation of a link.
+            </summary>
+        </member>
+        <member name="T:HalKit.Json.ResourceContractResolver">
+            <summary>
+            Resolves a <see cref="T:Newtonsoft.Json.Serialization.JsonContract"/> for a given <see cref="T:HalKit.Models.Response.Resource"/>.
+            </summary>
+        </member>
+        <member name="M:HalKit.Json.ResourceContractResolver.#ctor(Newtonsoft.Json.JsonSerializerSettings)">
+            <summary>
+            Initializes a new instance of the <see cref="T:HalKit.Json.ResourceContractResolver"/>
+            class.
+            </summary>
+        </member>
+        <member name="T:HalKit.Json.EmbeddedAttribute">
+            <summary>
+            When applied to the member of a type, specifies that the member
+            should be serialized/deserialized into/from the "_embedded" section
+            of "application/hal+json" content.
+            </summary>
+        </member>
+        <member name="M:HalKit.Json.EmbeddedAttribute.#ctor(System.String)">
+            <summary>
+            Initializes a new instances of a <see cref="T:HalKit.Json.EmbeddedAttribute"/>
+            class with the given link relation.
+            </summary>
+            <param name="rel"></param>
+        </member>
+        <member name="P:HalKit.Json.EmbeddedAttribute.Rel">
+            <summary>
+            Gets the link relation of an embedded resource.
+            </summary>
+        </member>
+        <member name="T:HalKit.Models.Request.IRequestParameters">
+            <summary>
+            Provides the query parameters and headers in a particular request.
+            </summary>
+        </member>
+        <member name="P:HalKit.Models.Request.IRequestParameters.Parameters">
+            <summary>
+            The query parameters to be used in a request
+            </summary>
+        </member>
+        <member name="P:HalKit.Models.Request.IRequestParameters.Headers">
+            <summary>
+            The headers to be used in a request
+            </summary>
+        </member>
+        <member name="T:HalKit.Models.Response.Link">
+            <summary>
+            Represents a hyperlink between API resources.
+            </summary>
+        </member>
+        <member name="P:HalKit.Models.Response.Link.HRef">
+            <summary>
+            Gets or sets the target URI of the <see cref="T:HalKit.Models.Response.Link"/>.
+            </summary>
+        </member>
+        <member name="P:HalKit.Models.Response.Link.Title">
+            <summary>
+            Gets or sets the title that describes the resource targeted by the
+            <see cref="T:HalKit.Models.Response.Link"/>.
+            </summary>
+        </member>
+        <member name="P:HalKit.Models.Response.Link.IsTemplated">
+            <summary>
+            Gets or sets a value that signifies whether the <see cref="P:HalKit.Models.Response.Link.HRef"/>
+            is templated.
+            </summary>
+        </member>
+        <member name="T:HalKit.Models.Response.Resource">
+            <summary>
+            Represents a resource in a Hyper-media API.
+            </summary>
+        </member>
+        <member name="P:HalKit.Models.Response.Resource.SelfLink">
+            <summary>
+            A <see cref="T:HalKit.Models.Response.Link"/> representing the URI of a <see cref="T:HalKit.Models.Response.Resource"/>.
+            </summary>
+        </member>
+        <member name="T:HalKit.Services.ILinkResolver">
+            <summary>
+            Applies parameters to <see cref="T:HalKit.Models.Response.Link"/>s to produce <see cref="T:System.Uri"/>s.
+            </summary>
+        </member>
+        <member name="M:HalKit.Services.ILinkResolver.ResolveLink(HalKit.Models.Response.Link,System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Resolves the href of the given <see cref="T:HalKit.Models.Response.Link"/> with the given parameters to
+            get a <see cref="T:System.Uri"/>. If <paramref name="link"/> is templated then the parameters
+            are applied in accordance with Uri Template Spec RFC6570 (http://tools.ietf.org/html/rfc6570).
+            Otherwise, the parameters are added to the href as query parameters.
+            </summary>
+        </member>
+        <member name="P:HalKit.IHalKitConfiguration.RootEndpoint">
+            <summary>
+            The <see cref="T:System.Uri"/> of the <see cref="T:HalKit.Models.Response.Resource"/> of an API.
+            This resource provides links to other API resources.
+            </summary>
+        </member>
+        <member name="P:HalKit.IHalKitConfiguration.CaptureSynchronizationContext">
+            <summary>
+            Determines whether asynchronous operations should capture the current
+            <see cref="T:System.Threading.SynchronizationContext"/>.
+            </summary>
+            <remarks>See http://blog.stephencleary.com/2012/02/async-and-await.html#avoiding-context.</remarks>
+        </member>
+    </members>
+</doc>

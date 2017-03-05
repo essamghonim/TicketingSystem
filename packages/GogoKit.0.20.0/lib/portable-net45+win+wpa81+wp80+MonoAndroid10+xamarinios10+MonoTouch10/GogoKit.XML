@@ -1,0 +1,904 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>GogoKit</name>
+    </assembly>
+    <members>
+        <member name="M:GogoKit.Clients.IShipmentsClient.GetShippingLabelAsync(HalKit.Models.Response.Link)">
+            <summary>
+            Downloads the courier shipping label.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#shipmentlabel</remarks>
+        </member>
+        <member name="M:GogoKit.Clients.IShipmentsClient.CreateAsync(System.Int32)">
+            <summary>
+            Create a shipping label for the ticket(s) of a <see cref="T:GogoKit.Models.Response.Sale"/>.
+            </summary>
+            <param name="saleId">The identifier of the <see cref="T:GogoKit.Models.Response.Sale"/>.</param>
+            <returns>The newly created <see cref="T:GogoKit.Models.Response.Shipment"/></returns>
+        </member>
+        <member name="M:GogoKit.Clients.IShipmentsClient.CreateAsync(System.Int32,GogoKit.Models.Request.ShipmentRequest)">
+            <summary>
+            Create a shipping label for the ticket(s) of a <see cref="T:GogoKit.Models.Response.Sale"/>.
+            </summary>
+            <param name="saleId">The identifier of the <see cref="T:GogoKit.Models.Response.Sale"/>.</param>
+            <param name="request">The parameters for this request</param>
+            <returns>The newly created <see cref="T:GogoKit.Models.Response.Shipment"/></returns>
+        </member>
+        <member name="M:GogoKit.Clients.IShipmentsClient.CreateAsync(System.Int32,GogoKit.Models.Request.ShipmentRequest,System.Threading.CancellationToken)">
+            <summary>
+            Create a shipping label for the ticket(s) of a <see cref="T:GogoKit.Models.Response.Sale"/>.
+            </summary>
+            <param name="saleId">The identifier of the <see cref="T:GogoKit.Models.Response.Sale"/>.</param>
+            <param name="request">The parameters for this request.</param>
+            <param name="cancellationToken">The cancellation token to cancel operation.</param>
+            <returns>The newly created <see cref="T:GogoKit.Models.Response.Shipment"/></returns>
+        </member>
+        <member name="M:GogoKit.Clients.IShipmentsClient.GetPickupWindowsAsync(GogoKit.Models.Response.Address)">
+            <summary>
+            Get the pickup windows available for <see cref="T:GogoKit.Models.Response.Carrier"/> collection.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#addresscarrier</remarks>
+        </member>
+        <member name="M:GogoKit.Clients.IShipmentsClient.GetPickupWindowsAsync(GogoKit.Models.Response.Address,GogoKit.Models.Request.CarrierRequest)">
+            <summary>
+            Get the pickup windows available for <see cref="T:GogoKit.Models.Response.Carrier"/> collection.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#addresscarrier</remarks>
+        </member>
+        <member name="M:GogoKit.Clients.IShipmentsClient.CreatePickupAsync(GogoKit.Models.Response.Carrier,GogoKit.Models.Response.PickupWindow)">
+            <summary>
+            Creates a new pickup for the ticket(s).
+            </summary>
+            <remarks>See http://developer.viagogo.net/?shell#carriercreatepickup</remarks>
+        </member>
+        <member name="T:GogoKit.Clients.IAddressesClient">
+            <summary>
+            A client for viagogo's User Addresses API.
+            </summary>
+        </member>
+        <member name="T:GogoKit.Clients.IOAuth2Client">
+            <summary>
+            Provides methods used in OAuth authentication.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#authentication</remarks>
+        </member>
+        <member name="M:GogoKit.Clients.IOAuth2Client.GetAuthorizationUrl(System.Uri,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Gets the URL where applications can obtain a user’s consent to make API calls
+            on their behalf.
+            </summary>
+            <param name="redirectUri">Application return URL where the authorization code
+            is sent. This must match the URL registered for your application</param>
+            <param name="scopes">The scopes that specify the type of access that
+            is needed.</param>
+            <remarks>
+            If the user accepts the request, viagogo will redirect them back to your
+            application's <paramref name="redirectUrl"/> with a temporary code that
+            can be exchanged for an access token.
+            </remarks>
+        </member>
+        <member name="M:GogoKit.Clients.IOAuth2Client.GetAuthorizationUrl(System.Uri,System.Collections.Generic.IEnumerable{System.String},System.String)">
+            <summary>
+            Gets the URL where applications can obtain a user’s consent to make API calls
+            on their behalf.
+            </summary>
+            <param name="redirectUri">Application redirect URL where the authorization
+            code is sent. This must match the URL registered for your application</param>
+            <param name="scopes">The scopes that specify the type of access that
+            is needed.</param>
+            <param name="state">An opaque value used to maintain state between the
+            authorize request and the callback.</param>
+            <remarks>
+            If the user accepts the request, viagogo will redirect them back to your
+            application's <paramref name="redirectUrl"/> with a temporary code that
+            can be exchanged for an access token.
+            </remarks>
+        </member>
+        <member name="M:GogoKit.Clients.IOAuth2Client.GetAccessTokenAsync(System.String,System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            Requests an OAuth access token.
+            </summary>
+            <param name="grantType">The OAuth2 grant type that should be used.</param>
+            <param name="scopes">The scopes that specify the type of access that
+            is needed.</param>
+            <param name="parameters">Other parameters that should be sent in the
+            request.</param>
+        </member>
+        <member name="M:GogoKit.Clients.IOAuth2Client.GetAuthorizationCodeAccessTokenAsync(System.String,System.Uri,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Requests an access token that will provide access to user-specific
+            data (purchases, sales, listings, etc).
+            </summary>
+            <param name="redirectUri">Application redirect URL where the authorization
+            code is sent. This must match the URL registered for your application</param>
+            <param name="code">The authorization code that was sent to your
+            application’s return URL.</param>
+            <param name="scopes">The scopes that specify the type of access that
+            is needed.</param>
+        </member>
+        <member name="M:GogoKit.Clients.IOAuth2Client.GetClientAccessTokenAsync(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Requests an access token that will provide access to public, non-user-specific
+            data (events, listings, etc).
+            </summary>
+        </member>
+        <member name="M:GogoKit.Clients.IOAuth2Client.RefreshAccessTokenAsync(GogoKit.Models.Response.OAuth2Token)">
+            <summary>
+            Obtain additional access tokens in order to prolong access to a
+            user’s data.
+            </summary>
+        </member>
+        <member name="T:GogoKit.Models.Payloads.Payload">
+            <summary>
+            A payload that gets sent to a <see cref="T:GogoKit.Models.Response.Webhook"/>'s configured URL.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#webhooks</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Payloads.Payload.Action">
+            <summary>
+            The action that triggered the <see cref="T:GogoKit.Models.Response.Webhook"/>.
+            </summary>
+        </member>
+        <member name="T:GogoKit.Models.Payloads.PingPayload">
+            <summary>
+            Triggered any time a <see cref="P:GogoKit.Models.Payloads.PingPayload.Webhook"/> is pinged via its
+            <see cref="P:GogoKit.Models.Response.Webhook.PingLink"/>.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Payloads.PingPayload.Webhook">
+            <summary>
+            The webhook that was pinged.
+            </summary>
+        </member>
+        <member name="T:GogoKit.Models.Payloads.SalesPayload">
+            <summary>
+            Triggered when something happens that affects a <see cref="P:GogoKit.Models.Payloads.SalesPayload.Sale"/>
+            (e.g. you sell one or more tickets).
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Payloads.SalesPayload.Sale">
+            <summary>
+            The sale that this payload relates to.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Payloads.SalesPayload.Event">
+            <summary>
+            The event for this sale.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Payloads.SalesPayload.Venue">
+            <summary>
+            The venue where the event is taking place.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Payloads.SalesPayload.SellerListing">
+            <summary>
+            The listing from which the tickets were sold.
+            </summary>
+        </member>
+        <member name="T:GogoKit.Models.Request.RequestParameters`2">
+            <summary>
+            Base class for classes that represent query parameters and headers to a
+            particular API endpoint
+            </summary>
+        </member>
+        <member name="T:GogoKit.Models.Response.Carrier">
+            <summary>
+            A carrier (e.g. UPS) that will collect tickets that are to be delivered.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#carrier</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Carrier.Id">
+            <summary>
+            The carrier identifier.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.Carrier.Name">
+            <summary>
+            The name of the carrier.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.Carrier.PickupWindows">
+            <summary>
+            The windows available for ticket collection.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.Carrier.CreatePickupLink">
+            <summary>
+            Creates a new pickup for the ticket(s).
+            </summary>
+            <remarks>See http://developer.viagogo.net/#carriercreatepickup</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.EmbeddedCategory.ImageLink">
+            <summary>
+            You can GET the href of this link to retrieve the image for a
+            <see cref="T:GogoKit.Models.Response.Category"/>.
+            </summary>
+        </member>
+        <member name="T:GogoKit.Models.Response.EmbeddedSale">
+            <summary>
+            A sale on the viagogo marketplace that belongs to the currently
+            authenticated user.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#sale</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.EmbeddedSale.Id">
+            <summary>
+            The sale identifier.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.EmbeddedSale.CreatedAt">
+            <summary>
+            The date when the sale was created.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.EmbeddedSale.Seating">
+            <summary>
+            The seating information for the ticket(s) that have been sold.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.EmbeddedSale.Proceeds">
+            <summary>
+            The total amount that the seller will receive for the sale.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.EmbeddedSale.NumberOfTickets">
+            <summary>
+            The number of tickets that have been sold.
+            </summary>
+        </member>
+        <member name="T:GogoKit.Models.Response.EmbeddedSellerListing">
+            <summary>
+            A set of tickets for sale on the viagogo marketplace that belong to the
+            currently authenticated user.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#sellerlisting</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.EmbeddedSellerListing.Id">
+            <summary>
+            The listing identifier.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.EmbeddedSellerListing.ExternalId">
+            <summary>
+            An identifier that has been assigned to the listing in an external
+            inventory management system.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.EmbeddedSellerListing.CreatedAt">
+            <summary>
+            The date when the listing was created.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.EmbeddedSellerListing.NumberOfTickets">
+            <summary>
+            The number of tickets available for purchase.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.EmbeddedSellerListing.TicketPrice">
+            <summary>
+            The price of each ticket in the listing.
+            </summary>
+        </member>
+        <member name="T:GogoKit.Models.Response.EmbeddedWebhook">
+            <summary>
+            A webhook is a subscription from a server application to certain topics
+            on the viagogo platform.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.EmbeddedWebhook.Id">
+            <summary>
+            The webhook identifier.
+            </summary>
+        </member>
+        <member name="T:GogoKit.Models.Response.Pickup">
+            <summary>
+            A scheduled courier pickup for a package.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#pickup</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Pickup.Id">
+            <summary>
+            The pickup identifier.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.Pickup.StartDate">
+            <summary>
+            The earliest date that the courier will pickup the package.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.Pickup.EndDate">
+            <summary>
+            The latest date that the courier will pickup the package.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.Pickup.Address">
+            <summary>
+            The <see cref="T:GogoKit.Models.Response.AddressSnapshot"/> where the courier will pickup the package.
+            </summary>
+        </member>
+        <member name="T:GogoKit.Models.Response.PickupWindow">
+            <summary>
+            Represents a window of time when a courier pickup can be arranged.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#pickupwindow</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.PickupWindow.StartDate">
+            <summary>
+            The date when the window starts.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.PickupWindow.EndDate">
+            <summary>
+            The date when the window ends.
+            </summary>
+        </member>
+        <member name="T:GogoKit.Models.Response.ChangedResources`1">
+            <summary>
+            Represents the resources that have changed since a previous request made
+            by your application.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#getting-resource-changes-since-your-last-request</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.ChangedResources`1.NewOrUpdatedResources">
+            <summary>
+            The new or updated <typeparamref name="T"/> resources.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.ChangedResources`1.DeletedResources">
+            <summary>
+            The deleted <typeparamref name="T"/> resources.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.ChangedResources`1.NextLink">
+            <summary>
+            The <see cref="T:HalKit.Models.Response.Link"/> that should be used to get subsequent
+            <typeparamref name="T"/> resource changes.
+            </summary>
+        </member>
+        <member name="T:GogoKit.Models.Response.Root">
+            <summary>
+            The root of the viagogo API service. Applications can use the links provided
+            by this resource to find all other resources in the API.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.Root.CountriesLink">
+            <summary>
+            You can GET the href of this link to retrieve the available
+            <see cref="T:GogoKit.Models.Response.Country"/> resources.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#viagogocountries.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Root.CurrenciesLink">
+            <summary>
+            You can GET the href of this link to retrieve the Currencies available
+            <see cref="T:GogoKit.Models.Response.Currency"/> resources.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#viagogocurrencies. </remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Root.GenresLink">
+            <summary>
+            You can GET the href of this link to retrieve the genre <see cref="T:GogoKit.Models.Response.Category"/>
+            resources (e.g. “Sports”, “Concerts”).
+            </summary>
+            <remarks>See http://developer.viagogo.net/#viagogogenres.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Root.LanguagesLink">
+            <summary>
+            You can GET the href of this link to retrieve the available <see cref="!:Language"/>.
+            resources
+            </summary>
+            <remarks>See http://developer.viagogo.net/#viagogolanguages. </remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Root.MetroAreasLink">
+            <summary>
+            You can GET the href of this link to retrieve the available <see cref="!:MetroArea"/>
+            resources.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#viagogometroareas. </remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Root.SearchLink">
+            <summary>
+            You can GET the href of this link to search for entities that
+            match a given query.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#viagogosearch. </remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Root.VenuesLink">
+            <summary>
+            You can GET the href of this link to retrieve the available <see cref="T:GogoKit.Models.Response.Venue"/>
+            resources.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#viagogovenues. </remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Root.UserLink">
+            <summary>
+            You can GET the href of this link to retrieve the current <see cref="T:GogoKit.Models.Response.User"/>
+            resource.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#viagogouser. </remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Root.CreateSellerListingLink">
+            <summary>
+            You can use a POST request on the href of this link to create a
+            <see cref="T:GogoKit.Models.Response.SellerListing"/> for an event.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#viagogocreatesellerlisting</remarks>
+        </member>
+        <member name="T:GogoKit.Models.Response.SellerListing">
+            <summary>
+            A set of tickets for sale on the viagogo marketplace that belong to the
+            currently authenticated user.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#sellerlisting</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.SellerListing.ConstraintsLink">
+            <summary>
+            You can GET the href of this link to retrieve the <see cref="T:GogoKit.Models.Response.ListingConstraints"/>
+            resource for updating a <see cref="T:GogoKit.Models.Response.SellerListing"/>.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#sellerlistingconstraints.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.SellerListing.TicketLocationLink">
+            <summary>
+            You can GET the href of this link to retrieve the <see cref="T:GogoKit.Models.Response.Address"/>
+            where the ticket(s) are located.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#sellerlistingticketlocation.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.SellerListing.UpdateTicketTypeLink">
+            <summary>
+            You can use a PATCH request on the href of this link to update the
+            type of tickets in a listing.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#sellerlistingupdatetickettype.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.SellerListing.UpdateSplitTypeLink">
+            <summary>
+            You can use a PATCH request on the href of this link to update the
+            way that tickets in the listing are allowed be split.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#sellerlistingupdatesplittype.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.SellerListing.UpdateTicketPriceLink">
+            <summary>
+            You can use a PATCH request on the href of this link to update the
+            price of each ticket in a listing.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#sellerlistingupdateticketprice.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.SellerListing.UpdateNumberOfTicketsLink">
+            <summary>
+            You can use a PATCH request on the href of this link to update the
+            number of tickets available for purchase.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#sellerlistingupdatenumberoftickets.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.SellerListing.UpdateTicketLocationLink">
+            <summary>
+            You can use a PATCH request on the href of this link to update the
+            location where the tickets are located.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#sellerlistingupdateticketlocation.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.SellerListing.UpdateNotesLink">
+            <summary>
+            You can use a PATCH request on the href of this link to update the
+            notes for a listing.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#sellerlistingupdateticketlocation.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.SellerListing.UpdateFaceValueLink">
+            <summary>
+            You can use a PATCH request on the href of this link to update the
+            the face value of each ticket in a listing.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#sellerlistingupdatefacevalue.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.SellerListing.UpdateSeatingLink">
+            <summary>
+            You can use a PATCH request on the href of this link to update the
+            seating information for a listing.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#sellerlistingupdateseating.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.SellerListing.PublishLink">
+            <summary>
+            You can use a PATCH request on the href of this link to make a
+            listing available for purchase on the viagogo marketplace.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#sellerlistingpublish.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.SellerListing.UnpublishLink">
+            <summary>
+            You can use a PATCH request on the href of this link to make a
+            listing unavailable for purchase on the viagogo marketplace.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#sellerlistingunpublish.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.SellerListing.DeleteLink">
+            <summary>
+            You can use a DELETE request on the href of this link to delete
+            a <see cref="T:GogoKit.Models.Response.SellerListing"/> for the current user.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.SellerListingPreview.CreateListingLink">
+            <summary>
+            You can use a POST request on the href of this link to create a
+            <see cref="T:GogoKit.Models.Response.SellerListing"/> for this event.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#eventcreatesellerlisting.</remarks>
+        </member>
+        <member name="T:GogoKit.Models.Response.Shipment">
+            <summary>
+            A shipment of one or more tickets by a seller.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#shipment</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Shipment.Id">
+            <summary>
+            The shipment identifier.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.Shipment.TrackingNumber">
+            <summary>
+            The identifier used to track the shipment of the ticket(s).
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.Shipment.DeliveryAddress">
+            <summary>
+            The address that the seller must ship the tickets to.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.Shipment.LabelLink">
+            <summary>
+            A courier shipping label.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#shipmentlabel</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Shipment.DeliveryMethod">
+            <summary>
+            The <see cref="P:GogoKit.Models.Response.Shipment.DeliveryMethod"/> for the ticket(s).
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.Shipment.PickupAddresses">
+            <summary>
+            The <see cref="T:GogoKit.Models.Response.Address"/>es where courier pickups could be arranged.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.Shipment.Pickups">
+            <summary>
+             courier <see cref="T:GogoKit.Models.Response.Pickup"/>s that have been scheduled.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.Shipments.CreateShipmentLink">
+            <summary>
+            Creates a new shipment for the ticket(s).
+            </summary>
+            <remarks>See http://developer.viagogo.net/#shipmentcreate</remarks>
+        </member>
+        <member name="T:GogoKit.Models.Response.Webhook">
+            <summary>
+            A webhook is a subscription from a server application to certain topics
+            on the viagogo platform.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.Webhook.PingLink">
+            <summary>
+            Triggers a Ping payload to be sent to the URL of the webhook.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.Address.CarrierLink">
+            <summary>
+            The carrier resource that can collect tickets at this address.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#addresscarrier</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Category.ChildrenLink">
+            <summary>
+            You can GET the href of this link to retrieve the <see cref="T:GogoKit.Models.Response.Category"/>
+            resources that are the direct children of a <see cref="T:GogoKit.Models.Response.Category"/>.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#categorychildren.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Category.EventsLink">
+            <summary>
+            You can GET the href of this link to retrieve the <see cref="T:GogoKit.Models.Response.Event"/>
+            resources in a <see cref="T:GogoKit.Models.Response.Category"/>.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#categoryevents.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Category.ParentLink">
+            <summary>
+            You can GET the href of this link to retrieve the <see cref="T:GogoKit.Models.Response.Category"/>
+            resource that is a parent of a <see cref="T:GogoKit.Models.Response.Category"/>.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#categoryparent.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Category.PerformersLink">
+            <summary>
+            You can GET the href of this link to retrieve the <see cref="T:GogoKit.Models.Response.Category"/>
+            resources that are the leaf-descendants of a <see cref="T:GogoKit.Models.Response.Category"/>.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#categoryperformers.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Category.WebPageLink">
+            <summary>
+            You can GET the href of this link to retrieve the viagogo website
+            webpage for a <see cref="T:GogoKit.Models.Response.Category"/>.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.Country.LocalWebPageLink">
+            <summary>
+            You can GET the href of this link to retrieve the local viagogo website
+            for a country.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#countrylocalwebpage.</remarks>
+        </member>
+        <member name="T:GogoKit.Models.Response.Event">
+            <summary>
+            An event on the viagogo platform.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.Event.CategoryLink">
+            <summary>
+            You can GET the href of this link to retrieve the <see cref="P:GogoKit.Models.Response.Event.Category"/>
+            resource that contains an <see cref="T:GogoKit.Models.Response.Event"/>.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#eventcategory.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Event.ListingsLink">
+            <summary>
+            You can GET the href of this link to retrieve the <see cref="T:GogoKit.Models.Response.Listing"/>
+            resources in an event.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#eventlistings.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Event.LocalWebPageLink">
+            <summary>
+            You can GET the href of this link to retrieve the local viagogo website webpage
+            for an event.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#eventlocalwebpage.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Event.WebPageLink">
+            <summary>
+            You can GET the href of this link to retrieve the viagogo website
+            webpage for an event.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#eventwebpage.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Event.ListingConstraintsLink">
+            <summary>
+            You can GET the href of this link to retrieve the
+            <see cref="T:GogoKit.Models.Response.ListingConstraints"/> resource for creating listings for
+            this event.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#eventlistingconstraints.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Event.CreateSellerListingPreviewLink">
+            <summary>
+            You can use a POST request on the href of this link to create a
+            preview of a <see cref="T:GogoKit.Models.Response.SellerListing"/> for this event.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#eventsellerlistingpreview.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Event.CreateSellerListingLink">
+            <summary>
+            You can use a POST request on the href of this link to create a
+            <see cref="T:GogoKit.Models.Response.SellerListing"/> for this event.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#eventcreatesellerlisting.</remarks>
+        </member>
+        <member name="T:GogoKit.Models.Response.Listing">
+            <summary>
+            A set of tickets for sale on the viagogo marketplace.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.Listing.EventLink">
+            <summary>
+            You can GET the href of this link to retrieve the <see cref="T:GogoKit.Models.Response.Event"/>
+            resource that a <see cref="T:GogoKit.Models.Response.Listing"/> is for.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#listingevent.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Listing.LocalWebPageLink">
+            <summary>
+            You can GET the href of this link to retrieve the local viagogo website webpage
+            where a listing can be purchased.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#listinglocalwebpage.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Listing.WebPageLink">
+            <summary>
+            You can GET the href of this link to retrieve the viagogo website
+            webpage where a listing can be purchased.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#listingwebpage.</remarks>
+        </member>
+        <member name="T:GogoKit.Models.Response.Sale">
+            <summary>
+            A sale on the viagogo marketplace that belongs to the currently
+            authenticated user.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#sale</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.SearchResult.CategoryLink">
+            <summary>
+            You can GET the href of this link to retrieve the <see cref="P:GogoKit.Models.Response.SearchResult.Category"/>
+            resource that a search result represents.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#searchresultcategory.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.SearchResult.EventLink">
+            <summary>
+            You can GET the href of this link to retrieve the <see cref="P:GogoKit.Models.Response.SearchResult.Event"/>
+            resource that a search result represents.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#searchresultevent.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.SearchResult.VenueLink">
+            <summary>
+            You can GET the href of this link to retrieve the <see cref="P:GogoKit.Models.Response.SearchResult.Venue"/>
+            resource that a search result represents.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#searchresultvenue.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.User.SellerListingsLink">
+            <summary>
+            You can GET the href of this link to retrieve the current user's
+            <see cref="T:GogoKit.Models.Response.SellerListing"/>s.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#usersellerlistings.</remarks>
+        </member>
+        <member name="T:GogoKit.Models.Response.Venue">
+            <summary>
+            A venue is a location where an event takes place.
+            </summary>
+        </member>
+        <member name="P:GogoKit.Models.Response.Venue.EventsLink">
+            <summary>
+            You can GET the href of this link to retrieve the <see cref="T:GogoKit.Models.Response.Event"/>
+            resources taking place in a particular venue.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#venueevents.</remarks>
+        </member>
+        <member name="P:GogoKit.Models.Response.Venue.MetroAreaLink">
+            <summary>
+            You can GET the href of this link to retrieve the <see cref="!:MetroArea"/>
+            resource that contains a venue.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#venueevents.</remarks>
+        </member>
+        <member name="M:GogoKit.HalClientExtensions.GetChangedResourcesAsync``1(HalKit.IHalClient,HalKit.Models.Response.Link,HalKit.Models.Request.IRequestParameters,System.Threading.CancellationToken)">
+            <summary>
+            Gets the <typeparamref name="T"/> resources that have changed since
+            your application's last request.
+            </summary>
+            <param name="nextLink">The <see cref="T:HalKit.Models.Response.Link"/> that was stored from
+            your last request.</param>
+        </member>
+        <member name="M:GogoKit.HalClientExtensions.GetChangedResourcesAsync``1(HalKit.IHalClient,HalKit.Models.Response.Link,System.Collections.Generic.IDictionary{System.String,System.String},System.Collections.Generic.IDictionary{System.String,System.Collections.Generic.IEnumerable{System.String}},System.Threading.CancellationToken)">
+            <summary>
+            Gets the <typeparamref name="T"/> resources that have changed since
+            your application's last request.
+            </summary>
+            <param name="nextLink">The <see cref="T:HalKit.Models.Response.Link"/> that was stored from
+            your last request.</param>
+        </member>
+        <member name="P:GogoKit.GogoKitConfiguration.ViagogoApiRootEndpoint">
+            <summary>
+            The root endpoint of the API to get the root resource that links to
+            all other API resources.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#explorable-api</remarks>
+        </member>
+        <member name="P:GogoKit.GogoKitConfiguration.ViagogoOAuthTokenEndpoint">
+            <summary>
+            The endpoint where OAuth2 access tokens are granted.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#getting-access-tokens</remarks>
+        </member>
+        <member name="P:GogoKit.GogoKitConfiguration.ViagogoAuthorizationEndpoint">
+            <summary>
+            The endpoint where applications can obtain a user’s consent to make API calls
+            on their behalf.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#authorization-code-grant</remarks>
+        </member>
+        <member name="P:GogoKit.GogoKitConfiguration.ViagogoApiEnvironment">
+            <summary>
+            Determines which <see cref="T:GogoKit.Enumerations.ApiEnvironment"/> should be used. Setting
+            this value will configure the values for <see cref="P:GogoKit.GogoKitConfiguration.ViagogoApiRootEndpoint"/>,
+            <see cref="P:GogoKit.GogoKitConfiguration.ViagogoOAuthTokenEndpoint"/> and <see cref="P:GogoKit.GogoKitConfiguration.ViagogoAuthorizationEndpoint"/>.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#sandbox-environment</remarks>
+        </member>
+        <member name="P:GogoKit.GogoKitConfiguration.CaptureSynchronizationContext">
+            <summary>
+            Determines whether asynchronous operations should capture the current
+            <see cref="T:System.Threading.SynchronizationContext"/>.
+            </summary>
+            <remarks>See http://blog.stephencleary.com/2012/02/async-and-await.html#avoiding-context.</remarks>
+        </member>
+        <member name="P:GogoKit.GogoKitConfiguration.LanguageCode">
+            <summary>
+            Determines the language of the API response content (e.g. event names
+            and error messages).
+            </summary>
+            <remarks>See http://developer.viagogo.net/#localization</remarks>
+        </member>
+        <member name="P:GogoKit.GogoKitConfiguration.CountryCode">
+            <summary>
+            Determines the geography-context of requests.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#localization</remarks>
+        </member>
+        <member name="P:GogoKit.GogoKitConfiguration.CurrencyCode">
+            <summary>
+            Determines the currency of responses that include monetary values.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#localization</remarks>
+        </member>
+        <member name="P:GogoKit.IGogoKitConfiguration.ViagogoApiRootEndpoint">
+            <summary>
+            The root endpoint of the API to get the root resource that links to
+            all other API resources.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#explorable-api</remarks>
+        </member>
+        <member name="P:GogoKit.IGogoKitConfiguration.ViagogoOAuthTokenEndpoint">
+            <summary>
+            The endpoint where OAuth2 access tokens are granted.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#getting-access-tokens</remarks>
+        </member>
+        <member name="P:GogoKit.IGogoKitConfiguration.ViagogoAuthorizationEndpoint">
+            <summary>
+            The endpoint where you can obtain a user’s consent to make API calls
+            on their behalf.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#authorization-code-grant</remarks>
+        </member>
+        <member name="P:GogoKit.IGogoKitConfiguration.ViagogoApiEnvironment">
+            <summary>
+            Determines which <see cref="T:GogoKit.Enumerations.ApiEnvironment"/> should be used. Setting
+            this value will configure the values for <see cref="P:GogoKit.IGogoKitConfiguration.ViagogoApiRootEndpoint"/>,
+            <see cref="P:GogoKit.IGogoKitConfiguration.ViagogoOAuthTokenEndpoint"/> and <see cref="P:GogoKit.IGogoKitConfiguration.ViagogoAuthorizationEndpoint"/>.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#sandbox-environment</remarks>
+        </member>
+        <member name="P:GogoKit.IGogoKitConfiguration.LanguageCode">
+            <summary>
+            Determines the language of the API response content (e.g. event names
+            and error messages).
+            </summary>
+            <remarks>See http://developer.viagogo.net/#localization</remarks>
+        </member>
+        <member name="P:GogoKit.IGogoKitConfiguration.CountryCode">
+            <summary>
+            Determines the geography-context of requests.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#localization</remarks>
+        </member>
+        <member name="P:GogoKit.IGogoKitConfiguration.CurrencyCode">
+            <summary>
+            Determines the currency of responses that include monetary values.
+            </summary>
+            <remarks>See http://developer.viagogo.net/#localization</remarks>
+        </member>
+        <member name="P:GogoKit.IGogoKitConfiguration.CaptureSynchronizationContext">
+            <summary>
+            Determines whether asynchronous operations should capture the current
+            <see cref="T:System.Threading.SynchronizationContext"/>.
+            </summary>
+            <remarks>See http://blog.stephencleary.com/2012/02/async-and-await.html#avoiding-context.</remarks>
+        </member>
+        <member name="T:GogoLib.BatchRequestContent">
+            <summary>
+            Derived <see cref="T:System.Net.Http.HttpContent"/> class which can encapsulate an <see cref="P:System.Net.Http.HttpMessageContent.HttpResponseMessage"/> or an <see cref="P:System.Net.Http.HttpMessageContent.HttpRequestMessage"/> as an entity with media type "application/http".
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Part 1 - Facebook Login Button";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+ 
+<h2>Part 1 - Facebook Login Button</h2>
+ 
+<fb:login-button autologoutlink="true" perms="read_friendlists, create_event, email, publish_stream"></fb:login-button>
+ 
+<p>Facebook Access Token: @Session["accessToken"]</p>
+<p>Facebook User Id: @Session["uid"]</p>
+ 
+<p>If you're not getting javascript prompts on each window load, make sure facebook app id in web config is correct.</p>

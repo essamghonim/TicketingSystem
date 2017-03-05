@@ -1,0 +1,41 @@
+﻿<div class="navbar-collapse collapse">
+<ul class="nav navbar-nav">
+<li> @Html.ActionLink("Home", "Index", "Home")</li>
+<li> @Html.ActionLink("Contact", "Contact", "Home")</li>
+<li> @Html.ActionLink("Viagogo", "Index", "Junk")</li>
+	</ul>
+</div>
+
+<div class="row">
+<div class="col-md-6 margin-top-20"> <a href="#" class="btn btn-primary btn-large btn-block"> <span class="glyphicon glyphicon-circle-arrow-down"></span>Withdrawal </a>
+	</div>
+		
+</div>
+<label>@ViewBag.Message</label>  
+	<form method="post"> <textarea name="Message"> </textarea> <input type="submit" value="send" /></form>
+	You are using @Request.Browser.Browser and thats ok
+	@{
+	var amounts = new List<Decimal>{100, 25.50m, -40, 275.99m};
+	}
+	<ul>
+@foreach(decimal amount in amounts){
+	<li>@formatAmount(amount)</li>
+	}
+</ul>
+@helper formatAmount(decimal amount)
+{
+var color = "green";
+if (amount <0)
+{
+color = "red";
+}
+<span style="color:@color"> @string.Format("{0:c}",amount)</span>
+}
+<p> @Html.ActionLink("Viagogo", "Contact", "Home", null, new{@class="btn btn-default"})</p>
+
+<div class="img">
+  <a target="_blank" href="/Content/CelineLondon.jpg">
+    <img src="/Content/CelineLondon.jpg" alt="Mountains" width="300" height="200">
+  </a>
+  <div class="desc">Add a description of the image here</div>
+</div>

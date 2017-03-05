@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+	@RenderBody()
+		<div id="fb-root"></div>
+    <script src="@Url.Content("~/Scripts/jquery-1.6.2.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Facebook.js")" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            InitialiseFacebook(@System.Configuration.ConfigurationManager.AppSettings["FacebookAppId"]);
+        });
+    </script>
+</body>
+</html>
